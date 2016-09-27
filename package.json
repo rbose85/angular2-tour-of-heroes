@@ -4,6 +4,7 @@
   "description": "Tutorial project from angular.io",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf app/*.js app/*.js.map",
     "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\"",
     "lite": "lite-server",
     "postinstall": "typings install",
