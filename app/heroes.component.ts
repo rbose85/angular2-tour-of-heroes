@@ -20,6 +20,18 @@ export class HeroesComponent implements OnInit {
         .then(heroes => this.heroes = heroes)
   }
 
+  add(name: string): void {
+    name = name.trim()
+    if (name) {
+      this.heroService
+          .create(name)
+          .then(hero => {
+            this.heroes.push(hero)
+            this.selectedHero = null
+          })
+    }
+  }
+
   ngOnInit(): void {
     this.getHeroes()
   }

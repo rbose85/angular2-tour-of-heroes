@@ -25,6 +25,17 @@ export class HeroService {
     return Promise.reject(error.message || error)
   }
 
+  create(name: string): Promise<Hero> {
+    const body = JSON.stringify({name})
+    const headers = { headers: this.headers }
+
+    return this.http
+        .post(this.heroesUrl, body, headers)
+        .toPromise()
+        .then(resp => resp.json().data)
+        .catch(this.handleError)
+  }
+
   update(hero: Hero): Promise<Hero> {
     const url = `${this.heroesUrl}/${hero.id}`
     const body = JSON.stringify(hero)
