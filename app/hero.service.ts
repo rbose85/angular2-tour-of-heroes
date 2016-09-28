@@ -26,7 +26,7 @@ export class HeroService {
   }
 
   create(name: string): Promise<Hero> {
-    const body = JSON.stringify({name})
+    const body = JSON.stringify({ name })
     const headers = { headers: this.headers }
 
     return this.http
@@ -45,6 +45,17 @@ export class HeroService {
         .put(url, body, headers)
         .toPromise()
         .then(() => hero)
+        .catch(this.handleError)
+  }
+
+  del(id: number): Promise<void> {
+    const url = `${this.heroesUrl}/${id}`
+    const headers = { headers: this.headers }
+
+    return this.http
+        .delete(url, headers)
+        .toPromise()
+        .then(() => null)
         .catch(this.handleError)
   }
 
